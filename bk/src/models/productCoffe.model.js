@@ -1,11 +1,6 @@
 const mongoose = require('mongoose')
 
 const productSchema = new mongoose.Schema({
-    id: {
-        type: Number,
-        required: true, 
-        unique: true // Asegura que no haya IDs duplicados
-    },
 nameProduct: {
     type: String,
     required: true 

@@ -27,7 +27,7 @@ const getSale = async(req,res,next) =>{
 //Listar ventas realizadas [GET]
 router.get('/', async (req, res)=>{
     try {
-        const sale = await SaleProduct.find();
+        const sale = await SaleProduct.find().populate('products.productId');
         console.log(sale)
         if(sale.length === 0 || sale.length ===''){
            return res.status(204).json('No se encontró ningun producto');
@@ -42,15 +42,13 @@ router.get('/', async (req, res)=>{
 
 //Crear una venta [POST]
 router.post('/', async (req, res)=>{
-    const { idSale, saleDate, amountSale, priceSale, category, productId} = req.body; 
+    const { idSale, saleDate, total, products} = req.body; 
 
     const newSale = new SaleProduct({
         idSale,
         saleDate,
-        amountSale,
-        priceSale,
-        category,
-        productId
+        total,
+        products
     });
     try {
         const saveSale = await newSale.save(); 
@@ -69,8 +67,7 @@ router.put('/:id', getSale, async (req,res) =>{
         sale.saleDate = req.body.saleDate || sale.saleDate;
         sale.amountSale = req.body.amountSale || sale.amountSale;
         sale.priceSale = req.body.priceSale || sale.priceSale;
-        sale.category = req.body.category || sale.category;
-        sale.productId = req.body.productId || sale.productId;
+        sale.products = req.body.products || sale.products;
 
         const saveSale = await sale.save();
 
