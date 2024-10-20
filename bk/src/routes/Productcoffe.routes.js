@@ -39,7 +39,16 @@ router.get('/', async (req, res)=>{
     }
 })
 
-//listar productos disponibles
+//listar categorias
+
+router.get('/categories', async (req, res) => {
+    try {
+        const categories = await Coffee.distinct('category'); // Obtiene categorías únicas
+        res.json(categories);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
 
 //Crear producto para el café [POST]
 router.post('/', async (req, res)=>{

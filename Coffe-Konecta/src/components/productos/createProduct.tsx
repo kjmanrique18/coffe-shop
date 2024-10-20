@@ -23,7 +23,7 @@ function CreateProduct({ closeModal, onProductCreated }: CreateProductProps) {
     setFormValues((prevValues) => ({
       ...prevValues,
       [name]: name === "price" || name === "weight" || name === "stock"
-        ? Number(value)  // Convertir a número
+        ? Math.max(Number(value), 0)  // Convertir a número
         : value,
     }));
   };
