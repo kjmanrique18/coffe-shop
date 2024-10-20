@@ -29,7 +29,7 @@ function Sell() {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      try {
+      try { 
         const response = await fetch("http://localhost:3000/product");
         const data = await response.json();
         setProducts(data);

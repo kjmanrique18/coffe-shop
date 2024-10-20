@@ -69,7 +69,7 @@ function Sale() {
     sales.filter((sale) => {
       return sale.saleDate.toLowerCase().includes(search.toLowerCase());
     }),
-    [sales, search]
+    [sales, search] 
   );
 
   const totalPages = Math.ceil(filteredSales.length / itemsPerPage);

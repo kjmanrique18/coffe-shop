@@ -13,7 +13,7 @@ const handleProductDelete = async (
   productToDelete: IProduct | null,
   setProducts: React.Dispatch<React.SetStateAction<IProduct[]>>,
   closeModal: () => void
-) => {
+) => { 
   if (!productToDelete) return;
 
   try {

@@ -39,7 +39,7 @@ function EditProduct({ closeModal, productToEdit, onProductUpdated }: EditProduc
         ? Math.max(Number(value), 0)
         : value,
     }));
-  };
+  }; 
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

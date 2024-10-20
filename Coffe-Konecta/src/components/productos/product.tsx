@@ -6,7 +6,7 @@ import DeleteProduct from "./deleteProduct";
 import IProduct from "../../interface/IProduct";
 
 
-function Product() {
+function Product() { 
   const [products, setProducts] = useState<IProduct[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
