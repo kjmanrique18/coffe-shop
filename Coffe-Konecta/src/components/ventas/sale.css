@@ -1,0 +1,100 @@
+.sales-container {
+    margin: 20px auto;
+    padding: 24px;
+    background-color: #f7fafc; /* Gray-100 */
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .sales-title {
+    font-size: 2rem; /* text-3xl */
+    font-weight: bold; /* font-bold */
+    margin-bottom: 24px; /* mb-6 */
+    color: #2d3748; /* Gray-800 */
+  }
+  
+  .search-input {
+    width: 100%; /* w-full */
+    padding: 12px; /* p-3 */
+    border: 1px solid #cbd5e0; /* border-gray-300 */
+    border-radius: 4px; /* rounded-md */
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  
+  .search-input:focus {
+    border-color: #3182ce; /* border-blue-500 */
+    box-shadow: 0 0 0 2px rgba(49, 130, 206, 0.5); /* focus:ring-blue-500 */
+  }
+  
+  .table-container {
+    background-color: white; /* bg-white */
+    border-radius: 8px; /* rounded-lg */
+    overflow: hidden; /* overflow-hidden */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .sales-table {
+    width: 100%; /* min-w-full */
+    border-collapse: collapse; /* Elimina el espacio entre bordes */
+  }
+  
+  .table-header {
+    background-color: #edf2f7; /* bg-gray-50 */
+  }
+  
+  .table-header th {
+    padding: 12px; /* px-6 py-3 */
+    text-align: left; /* Alinear texto a la izquierda */
+    color: #2d3748; /* Gray-800 */
+  }
+  
+  .table-body {
+    background-color: #ffffff; /* Fondo blanco para las filas */
+  }
+  
+  .table-row:nth-child(even) {
+    background-color: #f7fafc; /* Gray-100 para filas pares */
+  }
+  
+  .table-cell {
+    padding: 12px; /* px-6 py-3 */
+    border-bottom: 1px solid #e2e8f0; /* Border bottom */
+  }
+  
+  .text-indigo-600 {
+    color: #4c51bf; /* Indigo-600 */
+  }
+  
+  .text-indigo-600:hover {
+    color: #2b6cb0; /* Indigo-700 al hacer hover */
+  }
+  
+  .pagination-container {
+    display: flex;
+    justify-content: space-between; /* Espaciado entre botones de paginación */
+    margin-top: 20px; /* Separación superior */
+  }
+  
+  .pagination-button {
+    background-color: #edf2f7; /* Gray-50 */
+    color: #4a5568; /* Gray-700 */
+    padding: 10px 15px; /* Espaciado */
+    border: 1px solid #cbd5e0; /* border-gray-300 */
+    border-radius: 4px; /* rounded-md */
+    cursor: pointer; /* Puntero para indicar que es clickeable */
+  }
+  
+  .pagination-button:disabled {
+    background-color: #e2e8f0; /* Gray-200 */
+    cursor: not-allowed; /* Cambiar puntero cuando está deshabilitado */
+  }
+  
+  .pagination-button:hover:not(:disabled) {
+    background-color: #cbd5e0; /* border-gray-300 al hacer hover */
+  }
+  
+  .pagination-text {
+    align-self: center; /* Centrar texto de paginación */
+  }
+  
