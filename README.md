@@ -13,9 +13,9 @@ el resumen de la venta y se detallarán los artículos agregados y una vez compl
 <b>MongoDB</b> https://www.mongodb.com/try/download/compass v1.44.5 <br>
 
 <b>Paso a paso:</b> <br><br>
-1. <b>Ejecución de los paquetes en el bk:</b> npm install <br>
-2. <b>Ejecución de los paquetes en el front:</b> npm install <br>
+1. <b>Ejecución de los paquetes en la carpeta 'bk':</b> npm install <br>
+2. <b>Ejecución de los paquetes en la carpeta 'Coffe-Konecta':</b> npm install <br>
 3. <b>Ejecución en el bk para docker:</b> docker compose up -d  y se verifica en el programa docker que exita la ejecución<br>
 4. <b>Conexión a la bd:</b> Se selecciona 'new connection' y se proporciona la siguiente ruta en el campo denominado <b>'URL':</b> mongodb://kellydev:123456K@localhost:27017 en el campo denominado 'Name' se usa el nombre <b>mongoCoffe</b> y finalmente se selecciona el botón Save & Conect<br>
-5. <b>Ejecución del proyecto en el bk:</b> npm run dev <br>
-6. <b>Ejecución del proyecto en el front:</b> npm run dev <br>
+5. <b>Ejecución del proyecto en la carpeta 'bk' para el backend:</b> npm run dev <br>
+6. <b>Ejecución del proyecto en la carepta 'Coffe-Konecta' para el frontend:</b> npm run dev <br>
