@@ -12,16 +12,19 @@ const DetailModal: React.FC<DetailModalProps> = ({ sale, onClose }) => {
     <div className="modal">
       <div className="modal-content">
         <h3>Detalles de la Venta</h3>
-        <p><strong>Fecha:</strong> {new Date(sale.saleDate).toLocaleString()}</p>
-        <p><strong>Total:</strong> ${sale.total}</p>
+        <p>
+          <strong>Fecha:</strong> {new Date(sale.saleDate).toLocaleString()}
+        </p>
+        <p>
+          <strong>Total:</strong> ${sale.total}
+        </p>
         <h4>Productos:</h4>
         <ul>
           {sale.detailsSale && sale.detailsSale.length > 0 ? (
             sale.detailsSale.map((detail) => (
               <li key={detail._id}>
-                <strong>{detail.productId}</strong> - 
-                Cantidad: {detail.amountSale} - 
-                Precio: ${detail.priceSale}
+                <strong>{detail.productId}</strong> - Cantidad:{" "}
+                {detail.amountSale} - Precio: ${detail.priceSale}
               </li>
             ))
           ) : (
@@ -49,8 +52,13 @@ function Sale() {
       try {
         const response = await fetch("http://localhost:3000/sale");
         if (!response.ok) throw new Error("Error al consultar la API");
-        const data = await response.json();
-        setSales(data);
+        const data = await response.text();
+        if (data) {
+          const jsonData = JSON.parse(data);
+          setSales(jsonData);
+        }else {
+          console.error('Respuesta vacía');
+        }
       } catch (error) {
         if (error instanceof Error) {
           setError(error.message);
@@ -65,11 +73,12 @@ function Sale() {
     fetchSales();
   }, []);
 
-  const filteredSales = useMemo(() => 
-    sales.filter((sale) => {
-      return sale.saleDate.toLowerCase().includes(search.toLowerCase());
-    }),
-    [sales, search] 
+  const filteredSales = useMemo(
+    () =>
+      sales.filter((sale) => {
+        return sale.saleDate.toLowerCase().includes(search.toLowerCase());
+      }),
+    [sales, search]
   );
 
   const totalPages = Math.ceil(filteredSales.length / itemsPerPage);
@@ -167,10 +176,7 @@ function Sale() {
       </div>
 
       {showDetail && selectedSale && (
-        <DetailModal 
-          sale={selectedSale} 
-          onClose={() => setShowDetail(false)} 
-        />
+        <DetailModal sale={selectedSale} onClose={() => setShowDetail(false)} />
       )}
     </div>
   );

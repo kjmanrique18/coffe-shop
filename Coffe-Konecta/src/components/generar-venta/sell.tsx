@@ -18,7 +18,9 @@ function Sell() {
       try {
         const response = await fetch("http://localhost:3000/product/categories");
         const data = await response.json();
-        setCategories(data);
+        if(data.length > 0){
+          setCategories(data);
+        }
       } catch (error) {
         console.error("Error fetching categories:", error);
       }
@@ -32,7 +34,11 @@ function Sell() {
       try { 
         const response = await fetch("http://localhost:3000/product");
         const data = await response.json();
-        setProducts(data);
+        if(data.length > 0){
+          setProducts(data);
+        }else{
+          setProducts([])
+        }
       } catch (error) {
         console.error("Error fetching products:", error);
       }

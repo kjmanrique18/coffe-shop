@@ -1,33 +1,39 @@
 import React, { useState, useEffect, useMemo } from "react";
 import "./Product.css";
-import CreateProduct from "./createProduct"; 
-import EditProduct from "./editProduct"; 
+import CreateProduct from "./createProduct";
+import EditProduct from "./editProduct";
 import DeleteProduct from "./deleteProduct";
 import IProduct from "../../interface/IProduct";
 
-
-function Product() { 
+function Product() {
   const [products, setProducts] = useState<IProduct[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
-  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false); 
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [productToEdit, setProductToEdit] = useState<IProduct | null>(null); 
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false); 
-  const [productToDelete, setProductToDelete] = useState<IProduct | null>(null); 
+  const [productToEdit, setProductToEdit] = useState<IProduct | null>(null);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [productToDelete, setProductToDelete] = useState<IProduct | null>(null);
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         const response = await fetch("http://localhost:3000/product");
-        if (!response.ok) throw new Error("Error al consultar la API");
-        const data = await response.json();
-        setProducts(data);
+        const data = await response.text(); // Obtiene la respuesta como texto
+
+        if (data) {
+          const jsonData = JSON.parse(data);
+          // Manejar jsonData
+          setProducts(jsonData)
+        } else {
+          console.error('Respuesta vacía');
+        }
       } catch (error) {
         if (error instanceof Error) {
+          setProducts([]);
           setError(error.message);
         } else {
           setError("Error desconocido");
@@ -40,13 +46,13 @@ function Product() {
     fetchProducts();
   }, []);
 
-  const filteredProducts = useMemo(
-    () =>
-      products.filter((product) =>
-        product.nameProduct.toLowerCase().includes(search.toLowerCase())
-      ),
-    [products, search]
-  );
+  const filteredProducts = useMemo(() => {
+    if (!products) return []; // Retorna un array vacío si products es null
+
+    return products.filter((product) =>
+      product.nameProduct.toLowerCase().includes(search.toLowerCase())
+    );
+  }, [products, search]);
 
   const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
   const currentProducts = useMemo(() => {
@@ -83,7 +89,7 @@ function Product() {
         product._id === updatedProduct._id ? updatedProduct : product
       )
     );
-    setIsEditModalOpen(false); 
+    setIsEditModalOpen(false);
   };
 
   if (loading)
@@ -95,7 +101,10 @@ function Product() {
     <div className="products-container">
       <h2 className="products-title">Lista de Productos</h2>
       <div className="flex justify-end">
-        <button onClick={() => setIsCreateModalOpen(true)} className="createbutton">
+        <button
+          onClick={() => setIsCreateModalOpen(true)}
+          className="createbutton"
+        >
           Crear producto
         </button>
       </div>
@@ -151,36 +160,44 @@ function Product() {
             </tr>
           </thead>
           <tbody className="table-body">
-            {currentProducts.map((product) => (
-              <tr key={product._id} className="table-row">
-                <td className="table-cell-name">{product.nameProduct}</td>
-                <td className="table-cell">{product.reference}</td>
-                <td className="table-cell">${product.price}</td>
-                <td className="table-cell">{product.weight}</td>
-                <td className="table-cell">{product.category}</td>
-                <td className="table-cell">{product.stock}</td>
-                <td className="table-cell">
-                  <button
-                    className="text-indigo-600 hover:text-indigo-900"
-                    onClick={() => {
-                      setProductToEdit(product);
-                      setIsEditModalOpen(true);
-                    }}
-                  >
-                    Editar
-                  </button>
-                  <button
-                    className="text-red-600 hover:text-red-900 ml-2"
-                    onClick={() => {
-                      setProductToDelete(product); // Establecer el producto a eliminar
-                      setIsDeleteModalOpen(true); // Abrir el modal de confirmación de eliminación
-                    }}
-                  >
-                    Eliminar
-                  </button>
+            {currentProducts.length === 0 ? (
+              <tr>
+                <td colSpan={7} className="text-center">
+                  No hay productos disponibles.
                 </td>
               </tr>
-            ))}
+            ) : (
+              currentProducts.map((product) => (
+                <tr key={product._id} className="table-row">
+                  <td className="table-cell-name">{product.nameProduct}</td>
+                  <td className="table-cell">{product.reference}</td>
+                  <td className="table-cell">${product.price}</td>
+                  <td className="table-cell">{product.weight}</td>
+                  <td className="table-cell">{product.category}</td>
+                  <td className="table-cell">{product.stock}</td>
+                  <td className="table-cell">
+                    <button
+                      className="text-indigo-600 hover:text-indigo-900"
+                      onClick={() => {
+                        setProductToEdit(product);
+                        setIsEditModalOpen(true);
+                      }}
+                    >
+                      Editar
+                    </button>
+                    <button
+                      className="text-red-600 hover:text-red-900 ml-2"
+                      onClick={() => {
+                        setProductToDelete(product);
+                        setIsDeleteModalOpen(true);
+                      }}
+                    >
+                      Eliminar
+                    </button>
+                  </td>
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
       </div>
