@@ -1,5 +1,7 @@
+import IProduct from "./IProduct";
+
 interface IProductSale {
-    productId: string;  
+    productId: IProduct;  
     amountSale: number; 
     priceSale: number;  
     _id: string;        

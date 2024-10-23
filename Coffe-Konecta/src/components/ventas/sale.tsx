@@ -2,41 +2,6 @@ import React, { useState, useEffect, useMemo } from "react";
 import "./Sale.css";
 import ISale from "../../interface/ISale";
 
-interface DetailModalProps {
-  sale: ISale;
-  onClose: () => void;
-}
-const DetailModal: React.FC<DetailModalProps> = ({ sale, onClose }) => {
-  console.log(sale);
-  return (
-    <div className="modal">
-      <div className="modal-content">
-        <h3>Detalles de la Venta</h3>
-        <p>
-          <strong>Fecha:</strong> {new Date(sale.saleDate).toLocaleString()}
-        </p>
-        <p>
-          <strong>Total:</strong> ${sale.total}
-        </p>
-        <h4>Productos:</h4>
-        <ul>
-          {sale.detailsSale && sale.detailsSale.length > 0 ? (
-            sale.detailsSale.map((detail) => (
-              <li key={detail._id}>
-                <strong>{detail.productId}</strong> - Cantidad:{" "}
-                {detail.amountSale} - Precio: ${detail.priceSale}
-              </li>
-            ))
-          ) : (
-            <li>No hay detalles de productos disponibles.</li>
-          )}
-        </ul>
-        <button onClick={onClose}>Cerrar</button>
-      </div>
-    </div>
-  );
-};
-
 function Sale() {
   const [sales, setSales] = useState<ISale[]>([]);
   const [loading, setLoading] = useState(true);
@@ -56,7 +21,7 @@ function Sale() {
         if (data) {
           const jsonData = JSON.parse(data);
           setSales(jsonData);
-        }else {
+        } else {
           console.error('Respuesta vacía');
         }
       } catch (error) {
@@ -103,11 +68,8 @@ function Sale() {
     );
   };
 
-  if (loading)
-    return <div className="text-center py-10">Cargando ventas...</div>;
-  if (error)
-    return <div className="text-center py-10 text-red-500">Error: {error}</div>;
-
+  if (loading) return <div className="text-center py-10">Cargando ventas...</div>;
+  if (error) return <div className="text-center py-10 text-red-500">Error: {error}</div>;
   return (
     <div className="sales-container">
       <h2 className="sales-title">Lista de Ventas</h2>
@@ -134,9 +96,7 @@ function Sale() {
           <tbody className="table-body">
             {currentSales.map((sale) => (
               <tr key={sale._id} className="table-row">
-                <td className="table-cell">
-                  {new Date(sale.saleDate).toLocaleString()}
-                </td>
+                <td className="table-cell">{new Date(sale.saleDate).toLocaleString()}</td>
                 <td className="table-cell">${sale.total}</td>
                 <td className="table-cell">
                   <button
@@ -176,7 +136,38 @@ function Sale() {
       </div>
 
       {showDetail && selectedSale && (
-        <DetailModal sale={selectedSale} onClose={() => setShowDetail(false)} />
+        <div className="modal">
+          <div className="modal-content">
+            <h3>Detalles de la Venta</h3>
+            <p>
+              <strong>Fecha:</strong> {new Date(selectedSale.saleDate).toLocaleString()}
+            </p>
+            <p>
+              <strong>Total:</strong> ${selectedSale.total}
+            </p>
+            <table className="sales-table">
+          <thead className="table-header">
+            <tr>
+              <th>Producto</th>
+              <th>Cantidad</th>
+              <th>Precio Unitario</th>
+            </tr>
+          </thead>
+          <tbody className="table-body">
+            
+            {selectedSale.products.map((p) => (
+              <tr key={selectedSale._id} className="table-row">
+                <td className="table-cell">{p.productId.nameProduct}</td>
+                <td className="table-cell">{p.amountSale}</td>
+                <td className="table-cell">${p.productId.price}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+         
+            <button onClick={() => setShowDetail(false)}>Cerrar</button>
+          </div>
+        </div>
       )}
     </div>
   );
