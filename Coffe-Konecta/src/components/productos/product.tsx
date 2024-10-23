@@ -22,7 +22,8 @@ function Product() {
     const fetchProducts = async () => {
       try {
         const response = await fetch("http://localhost:3000/product");
-        const data = await response.text(); // Obtiene la respuesta como texto
+        // Obtiene la respuesta como texto
+        const data = await response.text(); 
 
         if (data) {
           const jsonData = JSON.parse(data);
@@ -47,7 +48,7 @@ function Product() {
   }, []);
 
   const filteredProducts = useMemo(() => {
-    if (!products) return []; // Retorna un array vacío si products es null
+    if (!products) return []; 
 
     return products.filter((product) =>
       product.nameProduct.toLowerCase().includes(search.toLowerCase())
@@ -128,11 +129,10 @@ function Product() {
         <DeleteProduct
           closeModal={() => setIsDeleteModalOpen(false)}
           onConfirm={() => {
-            // Al eliminar, no necesitamos definir handleProductDelete en este componente
-            setIsDeleteModalOpen(false); // Solo cerramos el modal después de la confirmación
+            setIsDeleteModalOpen(false); 
           }}
           productToDelete={productToDelete}
-          setProducts={setProducts} // Pasamos setProducts para actualizar la lista
+          setProducts={setProducts} 
         />
       )}
 

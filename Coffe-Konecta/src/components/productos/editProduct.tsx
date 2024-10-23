@@ -3,8 +3,8 @@ import IProduct from "../../interface/IProduct";
 
 interface EditProductProps {
   closeModal: () => void;
-  productToEdit: IProduct; // Nuevo prop para el producto a editar
-  onProductUpdated: (updatedProduct: IProduct) => void; // Nuevo prop para manejar la actualización
+  productToEdit: IProduct; 
+  onProductUpdated: (updatedProduct: IProduct) => void; 
 }
 
 function EditProduct({ closeModal, productToEdit, onProductUpdated }: EditProductProps) {
@@ -59,7 +59,7 @@ function EditProduct({ closeModal, productToEdit, onProductUpdated }: EditProduc
 
       const updatedProduct = await response.json();
       onProductUpdated(updatedProduct);
-      closeModal(); // Cerrar el modal después de editar el producto
+      closeModal(); 
     } catch (error) {
       console.error("Error:", error);
     }
@@ -76,7 +76,7 @@ function EditProduct({ closeModal, productToEdit, onProductUpdated }: EditProduc
             placeholder="Nombre del producto"
             value={formValues.nameProduct}
             onChange={handleInputChange}
-            required // Campo obligatorio
+            required 
           />
           <input
             type="text"
@@ -84,7 +84,7 @@ function EditProduct({ closeModal, productToEdit, onProductUpdated }: EditProduc
             placeholder="Referencia"
             value={formValues.reference}
             onChange={handleInputChange}
-            required // Campo obligatorio
+            required 
           />
           <input
             type="number"
@@ -92,7 +92,7 @@ function EditProduct({ closeModal, productToEdit, onProductUpdated }: EditProduc
             placeholder="Precio"
             value={formValues.price}
             onChange={handleInputChange}
-            required // Campo obligatorio
+            required 
           />
           <input
             type="number"
@@ -100,7 +100,7 @@ function EditProduct({ closeModal, productToEdit, onProductUpdated }: EditProduc
             placeholder="Peso"
             value={formValues.weight}
             onChange={handleInputChange}
-            required // Campo obligatorio
+            required 
           />
           <input
             type="text"
@@ -108,7 +108,7 @@ function EditProduct({ closeModal, productToEdit, onProductUpdated }: EditProduc
             placeholder="Categoría"
             value={formValues.category}
             onChange={handleInputChange}
-            required // Campo obligatorio
+            required 
           />
           <input
             type="number"
@@ -116,7 +116,7 @@ function EditProduct({ closeModal, productToEdit, onProductUpdated }: EditProduc
             placeholder="Stock"
             value={formValues.stock}
             onChange={handleInputChange}
-            required // Campo obligatorio
+            required 
           />
           <button type="submit">Actualizar</button>
         </form>

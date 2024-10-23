@@ -43,7 +43,7 @@ router.get('/', async (req, res)=>{
 
 router.get('/categories', async (req, res) => {
     try {
-        const categories = await Coffee.distinct('category'); // Obtiene categorías únicas
+        const categories = await Coffee.distinct('category'); 
         res.json(categories);
     } catch (error) {
         res.status(500).json({ message: error.message });

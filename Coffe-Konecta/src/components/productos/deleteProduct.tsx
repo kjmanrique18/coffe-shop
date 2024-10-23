@@ -30,7 +30,7 @@ const handleProductDelete = async (
       prevProducts.filter((product) => product._id !== productToDelete._id)
     );
 
-    closeModal(); // Cerrar el modal de eliminación
+    closeModal();
   } catch (error) {
     console.error("Error:", error);
   }
@@ -44,7 +44,7 @@ const DeleteProduct: React.FC<DeleteProductProps> = ({
 }) => {
   const handleConfirm = () => {
     handleProductDelete(productToDelete, setProducts, closeModal);
-    onConfirm(); // Otras acciones adicionales al confirmar
+    onConfirm(); 
   };
 
   return (

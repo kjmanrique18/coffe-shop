@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const Product = require('./productCoffe.model'); // Ajusta la ruta según la ubicación de tu modelo Product
+const Product = require('./productCoffe.model'); 
 
 const saleSchema = new mongoose.Schema({
 

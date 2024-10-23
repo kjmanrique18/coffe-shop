@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import IProduct from "../../interface/IProduct";
 import IProductSale from "../../interface/IProductSale";
-import './Sell.css'; // Asegúrate de importar el archivo CSS
+import './Sell.css'; 
 
 function Sell() {
   const [categories, setCategories] = useState<string[]>([]);
@@ -68,7 +68,7 @@ function Sell() {
     if (!selectedProduct || quantity <= 0) return;
 
     const productToAdd: IProductSale = {
-      productId: selectedProduct._id,
+      productId: selectedProduct,
       amountSale: quantity,
       priceSale: selectedProduct.price,
       _id: selectedProduct._id,
@@ -159,7 +159,7 @@ function Sell() {
           <tbody>
             {addedProducts.map((item, index) => (
               <tr key={index}>
-                <td>{products.find(p => p._id === item.productId)?.nameProduct}</td>
+                <td>{products.find(p => p._id === item.productId._id)?.nameProduct}</td>
                 <td>{item.amountSale}</td>
                 <td>{item.priceSale}</td>
               </tr>

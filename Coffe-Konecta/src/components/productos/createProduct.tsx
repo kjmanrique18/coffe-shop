@@ -54,7 +54,7 @@ function CreateProduct({ closeModal, onProductCreated }: CreateProductProps) {
 
       const newProduct = await response.json();
       onProductCreated(newProduct);
-      closeModal(); // Cerrar el modal después de crear el producto
+      closeModal(); 
     } catch (error) {
       console.error("Error:", error);
     }
@@ -71,7 +71,7 @@ function CreateProduct({ closeModal, onProductCreated }: CreateProductProps) {
             placeholder="Nombre del producto"
             value={formValues.nameProduct}
             onChange={handleInputChange}
-            required // Campo obligatorio
+            required 
           />
           <input
             type="text"
@@ -79,7 +79,7 @@ function CreateProduct({ closeModal, onProductCreated }: CreateProductProps) {
             placeholder="Referencia"
             value={formValues.reference}
             onChange={handleInputChange}
-            required // Campo obligatorio
+            required 
           />
           <input
             type="number"
@@ -87,7 +87,7 @@ function CreateProduct({ closeModal, onProductCreated }: CreateProductProps) {
             placeholder="Precio"
             value={formValues.price}
             onChange={handleInputChange}
-            required // Campo obligatorio
+            required 
           />
           <input
             type="number"
@@ -95,7 +95,7 @@ function CreateProduct({ closeModal, onProductCreated }: CreateProductProps) {
             placeholder="Peso"
             value={formValues.weight}
             onChange={handleInputChange}
-            required // Campo obligatorio
+            required 
           />
           <input
             type="text"
@@ -103,7 +103,7 @@ function CreateProduct({ closeModal, onProductCreated }: CreateProductProps) {
             placeholder="Categoría"
             value={formValues.category}
             onChange={handleInputChange}
-            required // Campo obligatorio
+            required 
           />
           <input
             type="number"
@@ -111,7 +111,7 @@ function CreateProduct({ closeModal, onProductCreated }: CreateProductProps) {
             placeholder="Stock"
             value={formValues.stock}
             onChange={handleInputChange}
-            required // Campo obligatorio
+            required 
           />
         
           <button type="submit">Guardar</button>
